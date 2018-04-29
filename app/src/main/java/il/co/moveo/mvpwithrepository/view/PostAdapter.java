@@ -28,16 +28,17 @@ public class PostAdapter extends RealmRecyclerViewAdapter<Post,PostAdapter.PostV
         View itemView=LayoutInflater.from(parent.getContext()).inflate(R.layout.item_post,parent,false);
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                //todo check with eliran if this is the right way
-                Intent intent=new Intent(context,AddNewPostActivity.class);
-                int position=(int)v.getTag();
-                int postId=getItem(position).getId();
-                intent.putExtra(Post.ID,postId);
-                context.startActivity(intent);
-            }
+            public void onClick(View v) { updatePost(v); }
         });
         return new PostViewHolder(itemView);
+    }
+
+    private void updatePost(View view) {
+        Intent intent=new Intent(context,AddNewPostActivity.class);
+        int position=(int)view.getTag();
+        int postId=getItem(position).getId();
+        intent.putExtra(Post.ID,postId);
+        context.startActivity(intent);
     }
 
     @Override
